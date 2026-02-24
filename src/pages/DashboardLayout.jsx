@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Outlet, Link, useLocation } from 'react-router-dom'
-import { LayoutDashboard, Code2, ClipboardList, BookOpen, User, Menu, X } from 'lucide-react'
+import { LayoutDashboard, Code2, ClipboardList, BookOpen, User, Menu, X, BarChart3, Clock } from 'lucide-react'
 
 export default function DashboardLayout() {
   const [sidebarOpen, setSidebarOpen] = useState(true)
@@ -11,22 +11,29 @@ export default function DashboardLayout() {
     { path: '/practice', label: 'Practice', icon: Code2 },
     { path: '/assessments', label: 'Assessments', icon: ClipboardList },
     { path: '/resources', label: 'Resources', icon: BookOpen },
+    { path: '/analyzer', label: 'Analyzer', icon: BarChart3 },
+    { path: '/history', label: 'History', icon: Clock },
     { path: '/profile', label: 'Profile', icon: User },
   ]
 
   const isActive = (path) => location.pathname === path
 
   return (
-    <div className="flex h-screen bg-gray-100">
+    <div className="flex h-screen bg-gray-50">
       {/* Sidebar */}
       <div
         className={`${
           sidebarOpen ? 'w-64' : 'w-0'
-        } bg-white shadow-lg transition-all duration-300 overflow-hidden`}
+        } bg-gradient-to-b from-slate-900 to-slate-800 shadow-xl transition-all duration-300 overflow-hidden`}
       >
-        <div className="p-6">
-          <h1 className="text-2xl font-bold text-primary mb-8">PlacementPrep</h1>
-          <nav className="space-y-2">
+        <div className="p-6 h-full flex flex-col">
+          <div className="flex items-center gap-2 mb-8">
+            <div className="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center text-white font-bold text-lg">
+              PP
+            </div>
+            <h1 className="text-xl font-bold text-white">PlacementPrep</h1>
+          </div>
+          <nav className="space-y-1 flex-1">
             {navItems.map((item) => {
               const Icon = item.icon
               return (
@@ -35,8 +42,8 @@ export default function DashboardLayout() {
                   to={item.path}
                   className={`flex items-center gap-3 px-4 py-3 rounded-lg transition duration-200 ${
                     isActive(item.path)
-                      ? 'bg-primary text-white'
-                      : 'text-gray-700 hover:bg-gray-100'
+                      ? 'bg-blue-600 text-white'
+                      : 'text-slate-300 hover:bg-slate-700 hover:text-white'
                   }`}
                 >
                   <Icon size={20} />
@@ -45,25 +52,28 @@ export default function DashboardLayout() {
               )
             })}
           </nav>
+          <div className="text-xs text-slate-400 pt-4 border-t border-slate-700">
+            © 2026 PlacementPrep
+          </div>
         </div>
       </div>
 
       {/* Main Content */}
       <div className="flex-1 flex flex-col overflow-hidden">
         {/* Header */}
-        <header className="bg-white shadow-sm">
+        <header className="bg-white border-b border-gray-200 shadow-sm">
           <div className="flex items-center justify-between px-6 py-4">
             <button
               onClick={() => setSidebarOpen(!sidebarOpen)}
-              className="text-gray-600 hover:text-gray-900"
+              className="text-gray-600 hover:text-gray-900 p-1"
             >
               {sidebarOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
-            <div className="flex items-center gap-4">
-              <span className="text-2xl font-bold text-primary">Placement Prep</span>
-              <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white font-bold">
-                U
-              </div>
+            <div className="flex-1 px-6">
+              <h2 className="text-xl font-bold text-gray-900">Placement Prep</h2>
+            </div>
+            <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-bold border border-blue-200">
+              U
             </div>
           </div>
         </header>

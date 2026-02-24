@@ -5,6 +5,8 @@ import Dashboard from './pages/Dashboard'
 import Practice from './pages/Practice'
 import Assessments from './pages/Assessments'
 import Resources from './pages/Resources'
+import Analyzer from './pages/Analyzer'
+import History from './pages/History'
 import Profile from './pages/Profile'
 
 function App() {
@@ -17,6 +19,8 @@ function App() {
           <Route path="/practice" element={<Practice />} />
           <Route path="/assessments" element={<Assessments />} />
           <Route path="/resources" element={<Resources />} />
+          <Route path="/analyzer" element={<Analyzer />} />
+          <Route path="/history" element={<History />} />
           <Route path="/profile" element={<Profile />} />
         </Route>
       </Routes>
